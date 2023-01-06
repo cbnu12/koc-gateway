@@ -5,5 +5,3 @@ spring:
       port: 27017
       authentication-database: admin
       database: koc
-      username: koc
-      password: 1234
