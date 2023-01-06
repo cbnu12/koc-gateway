@@ -1,4 +1,4 @@
-package com.koc.gateway.domain.jwt
+package com.koc.common.jwt
 
 import io.jsonwebtoken.*
 import io.jsonwebtoken.security.Keys
@@ -9,7 +9,7 @@ import java.util.*
 
 class JwtProvider {
     companion object {
-        private const val secretKey: String = "koc"
+        private const val secretKey: String = "koc-secretKey-cbnu-13jlkbnrfidusn1340r13nr031idn"
         private const val ACCESS_TOKEN_EXPIRE_TIME: Long = 1000 * 60 * 30
         private const val REFRESH_TOKEN_EXPIRE_TIME: Long = 1000 * 60 * 60 * 24 * 7
         private val key: Key = Keys.hmacShaKeyFor(secretKey.toByteArray())
@@ -24,14 +24,9 @@ class JwtProvider {
             return createToken(REFRESH_TOKEN_EXPIRE_TIME)
         }
 
-        fun validate(token: String): Boolean {
-            return try {
-                val claims = parser.parseClaimsJws(token)
-                !claims.body.expiration.before(Date())
-            } catch (e: Exception) {
-                log.info("{}", e.message)
-                false
-            }
+        fun validate(token: String?): Boolean {
+            return token?.parseClaimsJws(parser)?.
+                body?.expiration?.before(Date())?: false
         }
 
         private fun createToken(tokenValidTime: Long): String {
@@ -42,4 +37,8 @@ class JwtProvider {
                 .compact()
         }
     }
+}
+
+fun String.parseClaimsJws(parser: JwtParser): Jws<Claims> {
+    return parser.parseClaimsJws(this)
 }
