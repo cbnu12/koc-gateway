@@ -9,12 +9,14 @@ import com.koc.gateway.application.port.out.SaveUserPort
 import com.koc.common.jwt.JwtProvider
 import com.koc.gateway.domain.user.UserDto
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AuthenticationService(
     private val loadUserPort: LoadUserPort,
     private val saveUserPort: SaveUserPort
 ) : SignInUseCase, SignUpUseCase {
+    @Transactional(readOnly = true)
     override suspend fun signIn(userDto: UserDto): SignInResponseDto {
         val email = userDto.email!!
         val password = userDto.password!!
@@ -30,6 +32,7 @@ class AuthenticationService(
         }
     }
 
+    @Transactional
     override suspend fun signUp(userDto: UserDto): SignUpResponseDto {
         userDto.email?.let {
             loadUserPort.findByEmail(it)?.let {
