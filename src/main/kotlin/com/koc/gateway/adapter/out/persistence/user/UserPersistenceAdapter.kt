@@ -5,6 +5,7 @@ import com.koc.gateway.application.port.out.SaveUserPort
 import com.koc.gateway.domain.user.User
 import com.koc.gateway.domain.user.UserDto
 import kotlinx.coroutines.reactor.awaitSingle
+import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -12,6 +13,11 @@ class UserPersistenceAdapter(
     private val userMapper: UserMapper,
     private val userRepository: UserRepository
 ): LoadUserPort, SaveUserPort {
+    override suspend fun findById(id: String): User? {
+        return userRepository.findById(id)
+            .awaitSingleOrNull()?.toDomain(userMapper)
+    }
+
     override suspend fun findByEmailAndPassword(email: String, password: String): User? {
         val userDocument = userRepository.findByEmailAndPassword(email, password)
 

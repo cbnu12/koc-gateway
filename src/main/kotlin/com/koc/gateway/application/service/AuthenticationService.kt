@@ -1,12 +1,14 @@
 package com.koc.gateway.application.service
 
+import com.koc.common.jwt.JwtProvider
 import com.koc.gateway.adapter.`in`.web.authentication.SignInResponseDto
 import com.koc.gateway.adapter.`in`.web.authentication.SignUpResponseDto
+import com.koc.gateway.adapter.out.persistence.user.UserMapper
 import com.koc.gateway.application.port.`in`.SignInUseCase
 import com.koc.gateway.application.port.`in`.SignUpUseCase
 import com.koc.gateway.application.port.out.LoadUserPort
 import com.koc.gateway.application.port.out.SaveUserPort
-import com.koc.common.jwt.JwtProvider
+import com.koc.gateway.domain.user.User
 import com.koc.gateway.domain.user.UserDto
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -14,7 +16,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class AuthenticationService(
     private val loadUserPort: LoadUserPort,
-    private val saveUserPort: SaveUserPort
+    private val saveUserPort: SaveUserPort,
+    private val userMapper: UserMapper
 ) : SignInUseCase, SignUpUseCase {
     @Transactional(readOnly = true)
     override suspend fun signIn(userDto: UserDto): SignInResponseDto {
@@ -40,7 +43,9 @@ class AuthenticationService(
             }
         }
 
-        val createdUserDto = saveUserPort.save(userDto)
+        val user = User.create(userDto)
+
+        val createdUserDto = saveUserPort.save(userMapper.toDto(user))
 
         return SignUpResponseDto.success(createdUserDto.id!!)
     }

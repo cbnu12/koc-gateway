@@ -36,4 +36,14 @@ class UserMapper {
             status = userDocument.status
         )
     }
+
+    suspend fun toDto(user: User): UserDto {
+        return UserDto(
+            id = user.id,
+            email = user.email,
+            password = user.password,
+            name = user.name,
+            status = user.status
+        )
+    }
 }
