@@ -8,7 +8,7 @@ object AuthFilter {
     private val REFRESH_TOKEN: String = "refresh-token"
     private val X_USER_ID: String = "X_USER_ID"
 
-    suspend fun authCheck(
+    fun authCheck(
         serverRequest: ServerRequest
     ): ServerRequest {
         val accessToken = serverRequest.headers().header(ACCESS_TOKEN).firstOrNull()
