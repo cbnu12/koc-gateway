@@ -38,6 +38,7 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.5.4")
     implementation("org.apache.commons:commons-lang3:3.12.0")
 
+    implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.0.2")
 }
 
 dependencyManagement {

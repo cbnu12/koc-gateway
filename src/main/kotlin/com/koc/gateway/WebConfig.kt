@@ -6,6 +6,8 @@ import com.koc.gateway.adapter.`in`.authentication.web.AuthenticationHandler
 import com.koc.gateway.adapter.`in`.place.web.TrendPlaceHandler
 import com.koc.gateway.adapter.`in`.theme.web.RecommendationThemeHandler
 import com.koc.gateway.adapter.`in`.user.web.UserHandler
+import org.springdoc.core.annotations.RouterOperation
+import org.springdoc.core.annotations.RouterOperations
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -25,6 +27,10 @@ class WebConfig(
 ) : WebFluxConfigurer {
 
     @Bean
+    @RouterOperations(
+        RouterOperation(path = "/auth/sign-up", beanClass = AuthenticationHandler::class, beanMethod = "createUser"),
+        RouterOperation(path = "/auth/sign-in", beanClass = AuthenticationHandler::class, beanMethod = "createToken")
+    )
     fun authenticationRoute() =
         coRouter {
             "auth".nest {
@@ -40,6 +46,9 @@ class WebConfig(
         }
 
     @Bean
+    @RouterOperations(
+        RouterOperation(path = "/user/withdrawal", beanClass = UserHandler::class, beanMethod = "withdrawal")
+    )
     fun userRoute() =
         coRouter {
             "user".nest {
@@ -54,6 +63,9 @@ class WebConfig(
         }
 
     @Bean
+    @RouterOperations(
+        RouterOperation(path = "/place/trends", beanClass = TrendPlaceHandler::class, beanMethod = "searchTrandPlaces"),
+    )
     fun placeRoute() =
         coRouter {
             "place".nest {
@@ -68,6 +80,9 @@ class WebConfig(
         }
 
     @Bean
+    @RouterOperations(
+        RouterOperation(path = "/theme/recommendation", beanClass = RecommendationThemeHandler::class, beanMethod = "searchRecommendationThemes")
+    )
     fun themeRoute() =
         coRouter {
             "theme".nest {
