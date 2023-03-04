@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "3.0.0"
     id("io.spring.dependency-management") version "1.1.0"
+    id("com.google.cloud.tools.jib") version "3.3.1"
     kotlin("jvm") version "1.7.21"
     kotlin("plugin.spring") version "1.7.21"
 }
@@ -54,4 +55,22 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+jib {
+    from {
+        image = "eclipse-temurin:17.0.5_8-jre-ubi9-minimal"
+    }
+    to {
+        image = "koc-"+project.name
+
+        tags = setOf("latest")
+    }
+    container {
+        creationTime.set("USE_CURRENT_TIMESTAMP")
+
+        jvmFlags = listOf("-Dspring.profiles.active=prod", "-XX:+UseContainerSupport", "-Duser.timezone=Asia/Seoul")
+
+        ports = listOf("9090")
+    }
 }
