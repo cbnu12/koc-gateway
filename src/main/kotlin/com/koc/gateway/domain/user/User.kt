@@ -1,5 +1,7 @@
 package com.koc.gateway.domain.user
 
+import com.koc.gateway.application.user.port.`in`.UserDto
+
 data class User(
     var id: String?,
     var email: String,
