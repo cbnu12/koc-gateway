@@ -1,16 +1,23 @@
 package com.koc.gateway.adapter.out.place
 
+import com.koc.gateway.domain.place.PlaceDto
+import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.reactive.function.client.*
 
 @Component
 class PlaceApiClient(
     private val webClientBuilder: WebClient.Builder
 ) {
-    val webClient = webClientBuilder
-        .baseUrl("http://121.121.121.121:1234/place")
+    private val client = webClientBuilder
+        .baseUrl("https://example.com/api/places")
         .build()
-    suspend fun findTrendPlaces() {
 
+    suspend fun findTrendPlaces(): List<PlaceDto> {
+        return client.get()
+            .uri("/trending")
+            .accept(MediaType.APPLICATION_JSON)
+            .retrieve()
+            .awaitBody()
     }
 }
