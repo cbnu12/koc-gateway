@@ -23,122 +23,122 @@ import kotlin.jvm.optionals.getOrNull
 @Configuration
 @EnableWebFlux
 class WebConfig(
-    private val homeHandler: HomeHandler,
-    private val mapHandler: MapHandler,
-    private val themeHandler: ThemeHandler,
-    private val courseHandler: CourseHandler,
-    private val placeHandler: PlaceHandler
+        private val homeHandler: HomeHandler,
+        private val mapHandler: MapHandler,
+        private val themeHandler: ThemeHandler,
+        private val courseHandler: CourseHandler,
+        private val placeHandler: PlaceHandler
 ) : WebFluxConfigurer {
     @Bean
     @RouterOperations(
-        RouterOperation(path = "/home/trend-places", beanClass = HomeHandler::class, beanMethod = "searchTrendPlaces"),
-        RouterOperation(path = "/home/recommend-themes", beanClass = HomeHandler::class, beanMethod = "searchRecommendationThemes"),
-        RouterOperation(path = "/home/hot-courses", beanClass = HomeHandler::class, beanMethod = "searchHotCourses")
+            RouterOperation(path = "/home/trend-places", beanClass = HomeHandler::class, beanMethod = "searchTrendPlaces"),
+            RouterOperation(path = "/home/recommend-themes", beanClass = HomeHandler::class, beanMethod = "searchRecommendationThemes"),
+            RouterOperation(path = "/home/hot-courses", beanClass = HomeHandler::class, beanMethod = "searchHotCourses")
     )
     fun homeRoute() =
-        coRouter {
-            "home".nest {
-                accept(APPLICATION_JSON).nest {
-                    GET("/trend-places") { ok().bodyValueAndAwait(homeHandler::searchTrendPlaces) }
-                    GET("/recommend-themes") {ok().bodyValueAndAwait(homeHandler::searchRecommendationThemes) }
-                    GET("/hot-courses") { ok().bodyValueAndAwait(homeHandler::searchHotCourses) }
-                }
+            coRouter {
+                "home".nest {
+                    accept(APPLICATION_JSON).nest {
+                        GET("/trend-places") { ok().bodyValueAndAwait(homeHandler.searchTrendPlaces()) }
+                        GET("/recommend-themes") { ok().bodyValueAndAwait(homeHandler.searchRecommendationThemes()) }
+                        GET("/hot-courses") { ok().bodyValueAndAwait(homeHandler.searchHotCourses()) }
+                    }
 
-                filter { serverRequest, handler ->
-                    filterOnlyLog(serverRequest, handler)
+                    filter { serverRequest, handler ->
+                        filterOnlyLog(serverRequest, handler)
+                    }
                 }
             }
-        }
 
     @Bean
     @RouterOperations(
-        RouterOperation(path = "/map", beanClass = MapHandler::class, beanMethod = "searchPlace")
+            RouterOperation(path = "/map", beanClass = MapHandler::class, beanMethod = "searchPlace")
     )
     fun mapRouter() =
-        coRouter {
-            "map".nest {
-                accept(APPLICATION_JSON).nest {
-                    GET("") { request ->
-                        val latitude = request.queryParam("latitude").get()
-                        val longitude = request.queryParam("longitude").get()
+            coRouter {
+                "map".nest {
+                    accept(APPLICATION_JSON).nest {
+                        GET("") { request ->
+                            val latitude = request.queryParam("latitude").get()
+                            val longitude = request.queryParam("longitude").get()
 
-                        val result = mapHandler.searchPlace(latitude, longitude)
+                            val result = mapHandler.searchPlace(latitude, longitude)
 
-                        ok().bodyValueAndAwait(result)
+                            ok().bodyValueAndAwait(result)
+                        }
                     }
                 }
             }
-        }
 
     @Bean
     @RouterOperations(
-        RouterOperation(path = "/theme", beanClass = ThemeHandler::class, beanMethod = "searchTheme")
+            RouterOperation(path = "/theme", beanClass = ThemeHandler::class, beanMethod = "searchTheme")
     )
     fun themeRouter() =
-        coRouter {
-            "theme".nest {
-                accept(APPLICATION_JSON).nest {
-                    GET("") { request ->
-                        val keyword = request.queryParam("keyword").getOrNull()
+            coRouter {
+                "theme".nest {
+                    accept(APPLICATION_JSON).nest {
+                        GET("") { request ->
+                            val keyword = request.queryParam("keyword").getOrNull()
 
-                        val result = themeHandler.searchTheme(keyword)
+                            val result = themeHandler.searchTheme(keyword)
 
-                        ok().bodyValueAndAwait(result)
+                            ok().bodyValueAndAwait(result)
+                        }
                     }
                 }
             }
-        }
 
     @Bean
     @RouterOperations(
-        RouterOperation(path = "/course/search", beanClass = CourseHandler::class, beanMethod = "searchCourse"),
-        RouterOperation(path = "/course/{id}", beanClass = CourseHandler::class, beanMethod = "findCourse")
+            RouterOperation(path = "/course/search", beanClass = CourseHandler::class, beanMethod = "searchCourse"),
+            RouterOperation(path = "/course/{id}", beanClass = CourseHandler::class, beanMethod = "findCourse")
     )
     fun courseRouter() =
-        coRouter {
-            "course".nest {
-                accept(APPLICATION_JSON).nest {
-                    GET("search") { request ->
-                        val keyword = request.queryParam("keyword").getOrNull()
+            coRouter {
+                "course".nest {
+                    accept(APPLICATION_JSON).nest {
+                        GET("search") { request ->
+                            val keyword = request.queryParam("keyword").getOrNull()
 
-                        val result = courseHandler.searchCourse(keyword)
+                            val result = courseHandler.searchCourse(keyword)
 
-                        ok().bodyValueAndAwait(result)
-                    }
+                            ok().bodyValueAndAwait(result)
+                        }
 
-                    GET("{id}") { request ->
-                        val id = request.pathVariable("id").toLong()
+                        GET("{id}") { request ->
+                            val id = request.pathVariable("id").toLong()
 
-                        val result = courseHandler.findCourse(id)
+                            val result = courseHandler.findCourse(id)
 
-                        ok().bodyValueAndAwait(result)
+                            ok().bodyValueAndAwait(result)
+                        }
                     }
                 }
             }
-        }
 
     @Bean
     @RouterOperations(
-        RouterOperation(path = "/place/{id}", beanClass = PlaceHandler::class, beanMethod = "findPlace")
+            RouterOperation(path = "/place/{id}", beanClass = PlaceHandler::class, beanMethod = "findPlace")
     )
     fun placeRouter() =
-        coRouter {
-            "place".nest {
-                accept(APPLICATION_JSON).nest {
-                    GET("{id}") { request ->
-                        val id = request.pathVariable("id").toLong()
+            coRouter {
+                "place".nest {
+                    accept(APPLICATION_JSON).nest {
+                        GET("{id}") { request ->
+                            val id = request.pathVariable("id").toLong()
 
-                        val result = placeHandler.findPlace(id)
+                            val result = placeHandler.findPlace(id)
 
-                        ok().bodyValueAndAwait(result)
+                            ok().bodyValueAndAwait(result)
+                        }
                     }
                 }
             }
-        }
 
     suspend fun filterOnlyLog(
-        serverRequest: ServerRequest,
-        handler: suspend (ServerRequest) -> ServerResponse
+            serverRequest: ServerRequest,
+            handler: suspend (ServerRequest) -> ServerResponse
     ): ServerResponse {
         val loggedRequest = LogFilter.logRequest(serverRequest)
         return handler(loggedRequest)

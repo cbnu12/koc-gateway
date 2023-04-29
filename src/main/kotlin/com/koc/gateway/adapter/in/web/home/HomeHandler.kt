@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.server.ServerRequest
 
 @Component
 @Tag(name = "Home", description = "홈화면 관련 API")
@@ -24,7 +23,7 @@ class HomeHandler(
         ApiResponse(responseCode = "400", description = "Bad Request"),
         ApiResponse(responseCode = "500", description = "Internal Server Error")
     )
-    suspend fun searchTrendPlaces(serverRequest: ServerRequest): Page<TrendPlaceDto> {
+    suspend fun searchTrendPlaces(): Page<TrendPlaceDto> {
         return homeUseCase.searchTrendPlaces()
     }
 
@@ -34,7 +33,7 @@ class HomeHandler(
         ApiResponse(responseCode = "400", description = "Bad Request"),
         ApiResponse(responseCode = "500", description = "Internal Server Error")
     )
-    suspend fun searchRecommendationThemes(serverRequest: ServerRequest): Page<RecommendedThemeDto> {
+    suspend fun searchRecommendationThemes(): Page<RecommendedThemeDto> {
         return homeUseCase.searchRecommendTheme()
     }
 
@@ -44,7 +43,7 @@ class HomeHandler(
         ApiResponse(responseCode = "400", description = "Bad Request"),
         ApiResponse(responseCode = "500", description = "Internal Server Error")
     )
-    suspend fun searchHotCourses(serverRequest: ServerRequest): Page<HotCourseDto> {
+    suspend fun searchHotCourses(): Page<HotCourseDto> {
         return homeUseCase.searchHotCourses()
     }
 }
