@@ -14,18 +14,21 @@ class HomeService(
         return PageImpl(
                 listOf(
                         TrendPlaceDto(
+                                1L,
                                 "Mock Trend Place",
                                 "Mock Address",
                                 setOf("description1", "description2"),
                                 "Mock category"
                         ),
                         TrendPlaceDto(
+                                1L,
                                 "Mock Trend Place",
                                 "Mock Address",
                                 setOf("description1", "description2"),
                                 "Mock category"
                         ),
                         TrendPlaceDto(
+                                1L,
                                 "Mock Trend Place",
                                 "Mock Address",
                                 setOf("description1", "description2"),
@@ -38,19 +41,27 @@ class HomeService(
     override suspend fun searchRecommendTheme(): Page<RecommendedThemeDto> {
         return PageImpl(
                 listOf(
-                        RecommendedThemeDto("Mock Recommended Theme",
+                        RecommendedThemeDto(
+                                1L,
+                                "Mock Recommended Theme",
                                 3,
                                 "U+1F44D"
                         ),
-                        RecommendedThemeDto("Mock Recommended Theme",
+                        RecommendedThemeDto(
+                                1L,
+                                "Mock Recommended Theme",
                                 2,
                                 "U+1F525"
                         ),
-                        RecommendedThemeDto("Mock Recommended Theme",
+                        RecommendedThemeDto(
+                                1L,
+                                "Mock Recommended Theme",
                                 5,
                                 "U+1F4A9"
                         ),
-                        RecommendedThemeDto("Mock Recommended Theme",
+                        RecommendedThemeDto(
+                                1L,
+                                "Mock Recommended Theme",
                                 1,
                                 "U+1F4A9"
                         )
@@ -61,22 +72,30 @@ class HomeService(
     override suspend fun searchHotCourses(): Page<HotCourseDto> {
         return PageImpl(
                 listOf(
-                        HotCourseDto("Mock Hot Cource",
+                        HotCourseDto(
+                                1L,
+                                "Mock Hot Cource",
                                 UserDto("Kang"),
                                 3,
                                 "U+1F44D"
                         ),
-                        HotCourseDto("Mock Hot Cource",
+                        HotCourseDto(
+                                1L,
+                                "Mock Hot Cource",
                                 UserDto("Soung"),
                                 3,
                                 "U+1F44D"
                         ),
-                        HotCourseDto("Mock Hot Cource",
+                        HotCourseDto(
+                                1L,
+                                "Mock Hot Cource",
                                 UserDto("Jo"),
                                 3,
                                 "U+1F44D"
                         ),
-                        HotCourseDto("Mock Hot Cource",
+                        HotCourseDto(
+                                1L,
+                                "Mock Hot Cource",
                                 UserDto("Fuck"),
                                 3,
                                 "U+1F44D"
