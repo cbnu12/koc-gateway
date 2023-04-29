@@ -8,76 +8,77 @@ import org.springframework.data.domain.PageImpl
 import org.springframework.stereotype.Service
 
 @Service
-class CourseService: CourseUseCase {
+class CourseService : CourseUseCase {
     override suspend fun searchCourse(keyword: String?): Page<CourseDto> {
         return PageImpl(
-            listOf(
-                CourseDto(
-                    "Mock Course",
-                    UserDto("Mock User Name"),
-                    listOf(
-                        PlaceDto(
-                            1L,
-                            "Mock Place",
-                            "Mock Address",
-                            setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
-                        ),
-                        PlaceDto(
-                            2L,
-                            "Mock Place",
-                            "Mock Address",
-                            setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
-                        ),
-                        PlaceDto(
-                            3L,
-                            "Mock Place",
-                            "Mock Address",
-                            setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
+                listOf(
+                        CourseDto(
+                                "Mock Course",
+                                UserDto("Mock User Name"),
+                                listOf(
+                                        PlaceDto(
+                                                1L,
+                                                "Mock Place",
+                                                "Mock Address",
+                                                setOf("description1", "description2"),
+                                                "37.4020051732617",
+                                                "127.108662792918"
+
+                                        ),
+                                        PlaceDto(
+                                                2L,
+                                                "Mock Place",
+                                                "Mock Address",
+                                                setOf("description1", "description2"),
+                                                "37.4020051732617",
+                                                "127.108662792918"
+                                        ),
+                                        PlaceDto(
+                                                3L,
+                                                "Mock Place",
+                                                "Mock Address",
+                                                setOf("description1", "description2"),
+                                                "37.4020051732617",
+                                                "127.108662792918"
+                                        )
+                                ),
+                                "U+1F4A9"
                         )
-                    ),
-                    "U+1F4A9"
                 )
-            )
         )
     }
 
     override suspend fun findCourse(id: Long): CourseDto {
         return CourseDto(
-            "Mock Course",
-            UserDto("Mock User Name"),
-            listOf(
-                PlaceDto(
-                    1L,
-                    "Mock Place",
-                    "Mock Address",
-                    setOf("description1", "description2"),
-                    "1234.1234123",
-                    "1234.1234123"
+                "Mock Course",
+                UserDto("Mock User Name"),
+                listOf(
+                        PlaceDto(
+                                1L,
+                                "Mock Place",
+                                "Mock Address",
+                                setOf("description1", "description2"),
+                                "37.4020051732617",
+                                "127.108662792918"
+                        ),
+                        PlaceDto(
+                                2L,
+                                "Mock Place",
+                                "Mock Address",
+                                setOf("description1", "description2"),
+                                "37.4020051732617",
+                                "127.108662792918"
+                        ),
+                        PlaceDto(
+                                3L,
+                                "Mock Place",
+                                "Mock Address",
+                                setOf("description1", "description2"),
+                                "37.4020051732617",
+                                "127.108662792918"
+                        )
                 ),
-                PlaceDto(
-                    2L,
-                    "Mock Place",
-                    "Mock Address",
-                    setOf("description1", "description2"),
-                    "1234.1234123",
-                    "1234.1234123"
-                ),
-                PlaceDto(
-                    3L,
-                    "Mock Place",
-                    "Mock Address",
-                    setOf("description1", "description2"),
-                    "1234.1234123",
-                    "1234.1234123"
-                )
-            ),
-            "U+1F4A9"
+                "U+1F4A9"
         )
     }
 }

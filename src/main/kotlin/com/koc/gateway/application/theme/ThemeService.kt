@@ -19,24 +19,24 @@ class ThemeService : ThemeUseCase {
                         "Mock Place",
                         "Mock Address",
                         setOf("description1", "description2"),
-                        "1234.1234123",
-                        "1234.1234123"
+                                "37.4020051732617",
+                                "127.108662792918"
                     ),
                         PlaceDto(
                             2L,
                             "Mock Place",
                             "Mock Address",
                             setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
+                                "37.4020051732617",
+                                "127.108662792918"
                         ),
                         PlaceDto(
                             3L,
                             "Mock Place",
                             "Mock Address",
                             setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
+                                "37.4020051732617",
+                                "127.108662792918"
                         )
                     ),
                     "U+1F4A9"
@@ -49,24 +49,24 @@ class ThemeService : ThemeUseCase {
                             "Mock Place",
                             "Mock Address",
                             setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
+                                "37.4020051732617",
+                                "127.108662792918"
                         ),
                         PlaceDto(
                             2L,
                             "Mock Place",
                             "Mock Address",
                             setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
+                                "37.4020051732617",
+                                "127.108662792918"
                         ),
                         PlaceDto(
                             3L,
                             "Mock Place",
                             "Mock Address",
                             setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
+                                "37.4020051732617",
+                                "127.108662792918"
                         )
                     ),
                     "U+1F4A9"
@@ -79,24 +79,24 @@ class ThemeService : ThemeUseCase {
                             "Mock Place",
                             "Mock Address",
                             setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
+                                "37.4020051732617",
+                                "127.108662792918"
                         ),
                         PlaceDto(
                             2L,
                             "Mock Place",
                             "Mock Address",
                             setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
+                                "37.4020051732617",
+                                "127.108662792918"
                         ),
                         PlaceDto(
                             3L,
                             "Mock Place",
                             "Mock Address",
                             setOf("description1", "description2"),
-                            "1234.1234123",
-                            "1234.1234123"
+                                "37.4020051732617",
+                                "127.108662792918"
                         )
                     ),
                     "U+1F4A9"

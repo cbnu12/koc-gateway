@@ -11,8 +11,8 @@ class PlaceService: PlaceUseCase {
             "Mock Place",
             "Mock Address",
             setOf("description1", "description2"),
-            "1234.1234123",
-            "1234.1234123"
+                "37.4020051732617",
+                "127.108662792918"
         )
     }
 }
