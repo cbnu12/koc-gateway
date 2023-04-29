@@ -1,15 +1,16 @@
 package com.koc.gateway.adapter.`in`.web.home
 
 import com.koc.gateway.application.home.HomeUseCase
+import com.koc.gateway.application.home.HotCourseDto
+import com.koc.gateway.application.home.RecommendedThemeDto
+import com.koc.gateway.application.home.TrendPlaceDto
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.data.domain.Page
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
-import org.springframework.web.reactive.function.server.ServerResponse
-import org.springframework.web.reactive.function.server.bodyValueAndAwait
-import org.springframework.web.reactive.function.server.json
 
 @Component
 @Tag(name = "Home", description = "홈화면 관련 API")
@@ -23,9 +24,8 @@ class HomeHandler(
         ApiResponse(responseCode = "400", description = "Bad Request"),
         ApiResponse(responseCode = "500", description = "Internal Server Error")
     )
-    suspend fun searchTrendPlaces(serverRequest: ServerRequest): ServerResponse {
-        val data = homeUseCase.searchTrendPlaces()
-        return ServerResponse.ok().json().bodyValueAndAwait(data)
+    suspend fun searchTrendPlaces(serverRequest: ServerRequest): Page<TrendPlaceDto> {
+        return homeUseCase.searchTrendPlaces()
     }
 
     @Operation(summary = "추천 테마 조회 API", description = "추천 테마를 조회합니다.")
@@ -34,9 +34,8 @@ class HomeHandler(
         ApiResponse(responseCode = "400", description = "Bad Request"),
         ApiResponse(responseCode = "500", description = "Internal Server Error")
     )
-    suspend fun searchRecommendationThemes(serverRequest: ServerRequest): ServerResponse {
-        val data = homeUseCase.searchRecommendTheme()
-        return ServerResponse.ok().json().bodyValueAndAwait(data)
+    suspend fun searchRecommendationThemes(serverRequest: ServerRequest): Page<RecommendedThemeDto> {
+        return homeUseCase.searchRecommendTheme()
     }
 
     @Operation(summary = "인기 많은 여행 코스 조회 API", description = "인기 많은 여행 코스를 조회합니다.")
@@ -45,8 +44,7 @@ class HomeHandler(
         ApiResponse(responseCode = "400", description = "Bad Request"),
         ApiResponse(responseCode = "500", description = "Internal Server Error")
     )
-    suspend fun searchHotCourses(serverRequest: ServerRequest): ServerResponse {
-        val data = homeUseCase.searchHotCourses()
-        return ServerResponse.ok().json().bodyValueAndAwait(data)
+    suspend fun searchHotCourses(serverRequest: ServerRequest): Page<HotCourseDto> {
+        return homeUseCase.searchHotCourses()
     }
 }

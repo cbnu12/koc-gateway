@@ -39,9 +39,9 @@ class WebConfig(
         coRouter {
             "home".nest {
                 accept(APPLICATION_JSON).nest {
-                    GET("/trend-places", homeHandler::searchTrendPlaces)
-                    GET("/recommend-themes", homeHandler::searchRecommendationThemes)
-                    GET("/hot-courses", homeHandler::searchHotCourses)
+                    GET("/trend-places") { ok().bodyValueAndAwait(homeHandler::searchTrendPlaces) }
+                    GET("/recommend-themes") {ok().bodyValueAndAwait(homeHandler::searchRecommendationThemes) }
+                    GET("/hot-courses") { ok().bodyValueAndAwait(homeHandler::searchHotCourses) }
                 }
 
                 filter { serverRequest, handler ->
