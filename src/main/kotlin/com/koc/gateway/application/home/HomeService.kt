@@ -1,6 +1,5 @@
 package com.koc.gateway.application.home
 
-import com.koc.gateway.application.place.PlacePort
 import com.koc.gateway.domain.user.UserDto
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service
 
 @Service
 class HomeService(
-        private val placePort: PlacePort
 ) : HomeUseCase {
     override suspend fun searchTrendPlaces(): Page<TrendPlaceDto> {
         return PageImpl(
