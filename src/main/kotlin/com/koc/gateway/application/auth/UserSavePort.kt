@@ -2,6 +2,6 @@ package com.koc.gateway.application.auth
 
 import com.koc.gateway.domain.user.User
 
-interface UserSavePort {
+fun interface UserSavePort {
     suspend fun save(user: User)
 }

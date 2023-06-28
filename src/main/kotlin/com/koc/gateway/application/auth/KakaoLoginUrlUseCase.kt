@@ -1,5 +1,5 @@
 package com.koc.gateway.application.auth
 
-interface KakaoLoginUrlUseCase {
+fun interface KakaoLoginUrlUseCase {
     suspend fun getUrl(): String
 }

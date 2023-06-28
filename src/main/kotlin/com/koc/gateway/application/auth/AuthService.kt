@@ -17,6 +17,5 @@ class AuthService(
     override suspend fun getToken(code: String): String {
         val token = Token(tokenLoadPort.loadToken(code))
         return token.value
-
     }
 }

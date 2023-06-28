@@ -1,5 +1,5 @@
 package com.koc.gateway.application.auth
 
-interface KakaoLoginUrlLoadPort {
+fun interface KakaoLoginUrlLoadPort {
     suspend fun loadKakaoLoginUrl(): String
 }
