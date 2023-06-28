@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.awaitExchange
 @Component
 class AuthAdapter: KakaoLoginUrlLoadPort, TokenLoadPort{
 
-    private val webClient = WebClient.create("http://temp.temp.temp/auth")
+    private val webClient = WebClient.create("http://211.208.125.180:8085/auth")
 
     override suspend fun loadKakaoLoginUrl(): String {
         return webClient.get()
