@@ -1,9 +1,6 @@
 package com.koc.gateway.adapter.`in`.web.home
 
-import com.koc.gateway.application.home.HomeUseCase
-import com.koc.gateway.application.home.HotCourseDto
-import com.koc.gateway.application.home.RecommendedThemeDto
-import com.koc.gateway.application.home.TrendPlaceDto
+import com.koc.gateway.application.home.*
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
@@ -14,7 +11,9 @@ import org.springframework.stereotype.Component
 @Component
 @Tag(name = "Home", description = "홈화면 관련 API")
 class HomeHandler(
-    private val homeUseCase: HomeUseCase
+    private val recommendSearchUseCase: RecommendSearchUseCase,
+    private val trendPlaceSearchUseCase: TrendPlaceSearchUseCase,
+    private val hotCoursesSearchUseCase: HotCoursesSearchUseCase
 ) {
 
     @Operation(summary = "요즘 뜨는 장소 조회 API", description = "요즘 뜨는 장소를 조회합니다.")
@@ -24,7 +23,7 @@ class HomeHandler(
         ApiResponse(responseCode = "500", description = "Internal Server Error")
     )
     suspend fun searchTrendPlaces(): Page<TrendPlaceDto> {
-        return homeUseCase.searchTrendPlaces()
+        return trendPlaceSearchUseCase.searchTrendPlaces()
     }
 
     @Operation(summary = "추천 테마 조회 API", description = "추천 테마를 조회합니다.")
@@ -34,7 +33,7 @@ class HomeHandler(
         ApiResponse(responseCode = "500", description = "Internal Server Error")
     )
     suspend fun searchRecommendationThemes(): Page<RecommendedThemeDto> {
-        return homeUseCase.searchRecommendTheme()
+        return recommendSearchUseCase.searchRecommendTheme()
     }
 
     @Operation(summary = "인기 많은 여행 코스 조회 API", description = "인기 많은 여행 코스를 조회합니다.")
@@ -43,7 +42,7 @@ class HomeHandler(
         ApiResponse(responseCode = "400", description = "Bad Request"),
         ApiResponse(responseCode = "500", description = "Internal Server Error")
     )
-    suspend fun searchHotCourses(): Page<HotCourseDto> {
-        return homeUseCase.searchHotCourses()
+    suspend fun searchHotCourses(): Page<HotCourseResponse> {
+        return hotCoursesSearchUseCase.searchHotCourses()
     }
 }

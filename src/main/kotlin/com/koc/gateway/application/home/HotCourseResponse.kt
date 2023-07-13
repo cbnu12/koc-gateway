@@ -2,7 +2,7 @@ package com.koc.gateway.application.home
 
 import com.koc.gateway.domain.user.UserDto
 
-data class HotCourseDto(
+data class HotCourseResponse(
         val id: Long,
         val name: String,
         val createdBy: UserDto,

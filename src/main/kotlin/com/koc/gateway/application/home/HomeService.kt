@@ -1,5 +1,6 @@
 package com.koc.gateway.application.home
 
+import com.koc.gateway.application.user.UserLoadPort
 import com.koc.gateway.domain.user.UserDto
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
@@ -7,7 +8,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class HomeService(
-) : HomeUseCase {
+        private val userLoadPort: UserLoadPort
+) : RecommendSearchUseCase, HotCoursesSearchUseCase, TrendPlaceSearchUseCase {
     override suspend fun searchTrendPlaces(): Page<TrendPlaceDto> {
         return PageImpl(
                 listOf(
@@ -67,31 +69,31 @@ class HomeService(
         )
     }
 
-    override suspend fun searchHotCourses(): Page<HotCourseDto> {
+    override suspend fun searchHotCourses(): Page<HotCourseResponse> {
         return PageImpl(
                 listOf(
-                        HotCourseDto(
+                        HotCourseResponse(
                                 1L,
                                 "Mock Hot Cource",
                                 UserDto("Kang"),
                                 3,
                                 "U+1F44D"
                         ),
-                        HotCourseDto(
+                        HotCourseResponse(
                                 1L,
                                 "Mock Hot Cource",
                                 UserDto("Soung"),
                                 3,
                                 "U+1F44D"
                         ),
-                        HotCourseDto(
+                        HotCourseResponse(
                                 1L,
                                 "Mock Hot Cource",
                                 UserDto("Jo"),
                                 3,
                                 "U+1F44D"
                         ),
-                        HotCourseDto(
+                        HotCourseResponse(
                                 1L,
                                 "Mock Hot Cource",
                                 UserDto("Fuck"),
