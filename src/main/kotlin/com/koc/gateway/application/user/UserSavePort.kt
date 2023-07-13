@@ -1,4 +1,4 @@
-package com.koc.gateway.application.auth
+package com.koc.gateway.application.user
 
 import com.koc.gateway.domain.user.User
 
