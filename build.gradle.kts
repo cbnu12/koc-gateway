@@ -70,7 +70,9 @@ jib {
     container {
         creationTime.set("USE_CURRENT_TIMESTAMP")
 
-        jvmFlags = listOf("-Dspring.profiles.active=prod", "-XX:+UseContainerSupport", "-Duser.timezone=Asia/Seoul")
+        jvmFlags = listOf("-Dspring.profiles.active=prod", "-XX:+UseContainerSupport", "-Duser.timezone=Asia/Seoul"
+        , "-javaagent:./pinpoint/pinpoint-bootstrap-2.5.2.jar", "-Dpinpoint.agentId=gateway","-Dpinpoint.applicationName=gateway",
+        "-Dpinpoint.config=./pinpoint/pinpoint-root.config", "-Dspring.profiles.active=prod")
 
         ports = listOf("9090")
     }

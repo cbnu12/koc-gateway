@@ -2,6 +2,6 @@ package com.koc.gateway.application.place
 
 import com.koc.gateway.domain.place.PlaceDto
 
-interface PlaceUseCase {
+fun interface PlaceFindUseCase {
     suspend fun findPlace(id: Long): PlaceDto
 }

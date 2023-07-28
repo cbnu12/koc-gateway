@@ -1,6 +1,7 @@
 package com.koc.gateway.application.home
 
 import com.koc.gateway.application.user.UserLoadPort
+import com.koc.gateway.domain.place.PlaceService
 import com.koc.gateway.domain.user.UserDto
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
@@ -8,34 +9,20 @@ import org.springframework.stereotype.Service
 
 @Service
 class HomeService(
-        private val userLoadPort: UserLoadPort
+        private val userLoadPort: UserLoadPort,
+        private val placeService: PlaceService
 ) : RecommendSearchUseCase, HotCoursesSearchUseCase, TrendPlaceSearchUseCase {
-    override suspend fun searchTrendPlaces(): Page<TrendPlaceDto> {
+    override suspend fun searchTrendPlaces(sortBy: String, page: Int, size:Int): Page<TrendPlaceDto> {
+            val places = placeService.loadPlace(sortBy, page, size).items
+
         return PageImpl(
-                listOf(
-                        TrendPlaceDto(
-                                1L,
-                                "Mock Trend Place",
-                                "Mock Address",
-                                setOf("description1", "description2"),
-                                "Mock category"
-                        ),
-                        TrendPlaceDto(
-                                1L,
-                                "Mock Trend Place",
-                                "Mock Address",
-                                setOf("description1", "description2"),
-                                "Mock category"
-                        ),
-                        TrendPlaceDto(
-                                1L,
-                                "Mock Trend Place",
-                                "Mock Address",
-                                setOf("description1", "description2"),
-                                "Mock category"
-                        )
+                places.map { TrendPlaceDto(id = it.id,
+                        name = it.name,
+                        address = it.street,
+                        descriptions = setOf(it.description),
+                        category = "Mock category"
+                        ) }
                 )
-        )
     }
 
     override suspend fun searchRecommendTheme(): Page<RecommendedThemeDto> {
